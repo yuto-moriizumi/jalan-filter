@@ -9,8 +9,54 @@
 // @grant        none
 // ==/UserScript==
 
-const EXLUDE_CATEGORIES = ["陶芸教室・陶芸体験"];
-
+const EXLUDE_CATEGORIES = [
+  "陶芸教室・陶芸体験",
+  "香水作り",
+  "バイキング・ビュッフェ・ホテルレストラン",
+  "スキューバダイビング",
+  "アクセサリー作り",
+  "その他クラフト・工芸",
+  "日帰り温泉",
+  "乗馬",
+  "BBQ/バーベキュー",
+  "日本文化",
+  "染色・染物体験",
+  "その他レジャー・体験",
+  "ラフティング",
+  "沢下り(キャニオニング)",
+  "その他アウトドア",
+  "着物・浴衣レンタル・着付け体験",
+  "美術館",
+  "ガラス細工作り",
+  "その他風呂・スパ・サロン",
+  "山岳",
+  "郷土芸能・伝統芸能",
+  "その他ショッピング",
+  "茶道教室・茶道体験",
+  "その他クラフト・工芸",
+  "ショッピングセンター",
+  "その他レジャー・体験",
+  "町めぐり・食べ歩き",
+  "動物カフェ",
+  "調香",
+  "彫金教室・彫金体験",
+  "ハーバリウム",
+  "石鹸作り",
+  "食品サンプル製作",
+  "フラワーアレンジメント・ガーデニング",
+  "ポーセラーツサロン・ポーセリンアート",
+  "スポーツリゾート施設",
+  "レンタカー",
+  "その他乗り物",
+  "水族館",
+  "和菓子作り",
+  "レザークラフト",
+  "クルーズ・クルージング",
+  "人力車",
+  "伝統工芸",
+  "忍者・侍・武士体験",
+  "いちご狩り",
+];
 const ads = document.querySelectorAll("li.item-relation-planlist");
 ads.forEach((ad) => ad.remove());
 const items = document.querySelectorAll("li.item");
@@ -19,5 +65,7 @@ items.forEach((item) => {
   if (categoryContainer === null || categoryContainer.textContent === null)
     return;
   const category = categoryContainer.textContent.trim().split("／")[1];
-  EXLUDE_CATEGORIES.includes(category) && item.remove();
+  EXLUDE_CATEGORIES.some((exludeCategory) =>
+    category.includes(exludeCategory),
+  ) && item.remove();
 });
