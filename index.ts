@@ -33,9 +33,7 @@ const EXLUDE_CATEGORIES = [
   "郷土芸能・伝統芸能",
   "その他ショッピング",
   "茶道教室・茶道体験",
-  "その他クラフト・工芸",
   "ショッピングセンター",
-  "その他レジャー・体験",
   "町めぐり・食べ歩き",
   "動物カフェ",
   "調香",
@@ -56,6 +54,7 @@ const EXLUDE_CATEGORIES = [
   "伝統工芸",
   "忍者・侍・武士体験",
   "いちご狩り",
+  "キャンドル作り(アロマキャンドル等)"
 ];
 const ads = document.querySelectorAll("li.item-relation-planlist");
 ads.forEach((ad) => ad.remove());
