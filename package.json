@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.4",
+    "@tsconfig/recommended": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
