@@ -54,12 +54,18 @@ const EXLUDE_CATEGORIES = [
   "伝統工芸",
   "忍者・侍・武士体験",
   "いちご狩り",
-  "キャンドル作り(アロマキャンドル等)"
+  "キャンドル作り(アロマキャンドル等)",
 ];
 const ads = document.querySelectorAll("li.item-relation-planlist");
 ads.forEach((ad) => ad.remove());
 const items = document.querySelectorAll("li.item");
 items.forEach((item) => {
+  // 王道を含むかチェック
+  if (!item.textContent?.includes("王道")) {
+    item.remove();
+    return;
+  }
+  // 除外カテゴリに該当するかチェック
   const categoryContainer = item.querySelector("p.item-categories");
   if (categoryContainer === null || categoryContainer.textContent === null)
     return;
