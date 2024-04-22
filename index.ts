@@ -9,6 +9,9 @@
 // @grant        none
 // ==/UserScript==
 
+/** これ未満の観光地を非表示にする */
+const MIN_RATING = 3.8;
+
 const EXLUDE_CATEGORIES = [
   "陶芸教室・陶芸体験",
   "香水作り",
@@ -24,12 +27,9 @@ const EXLUDE_CATEGORIES = [
   "その他レジャー・体験",
   "ラフティング",
   "沢下り(キャニオニング)",
-  "その他アウトドア",
   "着物・浴衣レンタル・着付け体験",
-  "美術館",
   "ガラス細工作り",
   "その他風呂・スパ・サロン",
-  "山岳",
   "郷土芸能・伝統芸能",
   "その他ショッピング",
   "茶道教室・茶道体験",
@@ -45,8 +45,6 @@ const EXLUDE_CATEGORIES = [
   "ポーセラーツサロン・ポーセリンアート",
   "スポーツリゾート施設",
   "レンタカー",
-  "その他乗り物",
-  "水族館",
   "和菓子作り",
   "レザークラフト",
   "クルーズ・クルージング",
@@ -60,11 +58,9 @@ const ads = document.querySelectorAll("li.item-relation-planlist");
 ads.forEach((ad) => ad.remove());
 const items = document.querySelectorAll("li.item");
 items.forEach((item) => {
-  // 王道を含むかチェック
-  if (!item.textContent?.includes("王道")) {
-    item.remove();
-    return;
-  }
+  // 平均評価をチェック
+  parseFloat(item.querySelector("span.reviewPoint")?.textContent ?? "5") <
+    MIN_RATING && item.remove();
   // 除外カテゴリに該当するかチェック
   const categoryContainer = item.querySelector("p.item-categories");
   if (categoryContainer === null || categoryContainer.textContent === null)
