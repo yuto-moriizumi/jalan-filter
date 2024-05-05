@@ -54,19 +54,29 @@ const EXLUDE_CATEGORIES = [
   "いちご狩り",
   "キャンドル作り(アロマキャンドル等)",
 ];
+
+const CATEGORY_SEPARATOR = "／";
+
 const ads = document.querySelectorAll("li.item-relation-planlist");
 ads.forEach((ad) => ad.remove());
 const items = document.querySelectorAll("li.item");
 items.forEach((item) => {
   // 平均評価をチェック
-  parseFloat(item.querySelector("span.reviewPoint")?.textContent ?? "5") <
-    MIN_RATING && item.remove();
+  if (
+    parseFloat(item.querySelector("span.reviewPoint")?.textContent ?? "5") <
+    MIN_RATING
+  ) {
+    return item.remove();
+  }
   // 除外カテゴリに該当するかチェック
   const categoryContainer = item.querySelector("p.item-categories");
   if (categoryContainer === null || categoryContainer.textContent === null)
     return;
-  const category = categoryContainer.textContent.trim().split("／")[1];
+  const category = categoryContainer.textContent.trim();
+  // カテゴリ情報が含まれない場合は早期リターン
+  if (!category.includes(CATEGORY_SEPARATOR)) return;
+  const categories = category.split(CATEGORY_SEPARATOR)[1];
   EXLUDE_CATEGORIES.some((exludeCategory) =>
-    category.includes(exludeCategory),
+    categories.includes(exludeCategory),
   ) && item.remove();
 });
