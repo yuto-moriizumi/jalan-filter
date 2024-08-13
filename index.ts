@@ -76,7 +76,8 @@ items.forEach((item) => {
   // カテゴリ情報が含まれない場合は早期リターン
   if (!category.includes(CATEGORY_SEPARATOR)) return;
   const categories = category.split(CATEGORY_SEPARATOR)[1];
-  EXLUDE_CATEGORIES.some((exludeCategory) =>
+  const hasExcludedCategory = EXLUDE_CATEGORIES.some((exludeCategory) =>
     categories.includes(exludeCategory),
-  ) && item.remove();
+  );
+  if (hasExcludedCategory) item.remove();
 });
